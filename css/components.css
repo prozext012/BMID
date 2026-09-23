@@ -1,0 +1,78 @@
+/* ============ TOMBOL ============ */
+.btn{
+  background:var(--acc);border:none;color:#fff;padding:8px 15px;
+  border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;
+}
+.btn:hover{filter:brightness(1.15)}
+.btn:disabled{background:#333f57;color:#6b7a94;cursor:not-allowed}
+.btn.gray{background:var(--panel2);border:1px solid var(--line)}
+.btn.green{background:var(--ok)}
+.btn.red{background:var(--bad)}
+.btn.warn{background:var(--warn);color:#241a06}
+.btn.sm{padding:5px 10px;font-size:12px}
+
+/* ============ TABEL ============ */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{
+  color:var(--dim);text-align:left;padding:8px;
+  border-bottom:1px solid var(--line);font-size:11px;text-transform:uppercase;
+}
+td{padding:9px 8px;border-bottom:1px solid #202b40;vertical-align:middle}
+
+/* ============ PROGRESS BAR ============ */
+.bar{height:8px;background:#232f47;border-radius:4px;overflow:hidden;width:85px}
+.bar>div{height:100%;border-radius:4px}
+
+/* ============ TAG / LABEL STATUS ============ */
+.tag{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
+.tag.ok{background:rgba(51,194,127,.15);color:var(--ok)}
+.tag.warn{background:rgba(232,163,61,.15);color:var(--warn)}
+.tag.bad{background:rgba(224,85,85,.15);color:var(--bad)}
+.tag.info{background:rgba(61,125,253,.15);color:var(--acc)}
+
+/* ============ FORM ============ */
+select,input[type=range]{
+  background:var(--panel2);color:var(--txt);border:1px solid var(--line);
+  border-radius:6px;padding:6px 8px;font-size:13px;width:100%;
+}
+
+/* ============ LOG KEJADIAN ============ */
+.log{
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:12px;max-height:330px;overflow-y:auto;font-size:13px;
+}
+.log p{padding:6px 4px;border-bottom:1px solid #1c2637;color:var(--dim)}
+.log p b{color:var(--txt)}
+.log p.good b{color:var(--ok)}
+.log p.bad b{color:var(--bad)}
+.log p.warn b{color:var(--warn)}
+
+/* ============ MODAL ============ */
+.modal-bg{
+  position:fixed;inset:0;background:rgba(5,8,14,.75);
+  display:flex;align-items:center;justify-content:center;z-index:50;
+}
+.modal{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:22px;width:540px;max-width:94vw;max-height:88vh;overflow-y:auto;
+}
+
+/* ============ GAMBAR BUS (FOTO ASLI) ============ */
+.busimg{
+  background:#0b111c;border-radius:10px;overflow:hidden;
+  margin-bottom:10px;border:3px solid transparent;
+}
+.busimg img{width:100%;height:150px;object-fit:cover;display:block}
+.busimg svg{width:100%;height:auto;padding:8px;display:block;
+  background:linear-gradient(#cfe3ff,#9db9dd)}
+
+/* ============ PEMILIH WARNA LIVERY ============ */
+.colorpick{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.swatch{width:28px;height:28px;border-radius:50%;cursor:pointer;border:3px solid transparent}
+.swatch.sel{border-color:#fff}
+
+/* ============ GRAFIK KEUANGAN ============ */
+.chart{display:flex;align-items:flex-end;gap:4px;height:120px;margin-top:10px}
+.bcol{flex:1;display:flex;flex-direction:column;height:100%}
+.bcol .bars{display:flex;gap:2px;align-items:flex-end;flex:1}
+.bcol .b{flex:1;border-radius:3px 3px 0 0;min-height:2px}

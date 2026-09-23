@@ -1,0 +1,35 @@
+/* ============ SIDEBAR ============ */
+#sidebar{
+  width:225px;background:var(--panel);border-right:1px solid var(--line);
+  padding:16px 12px;position:fixed;top:0;bottom:0;overflow-y:auto;z-index:40;
+}
+.logo{
+  display:flex;align-items:center;gap:10px;
+  padding:4px 8px 16px;border-bottom:1px solid var(--line);margin-bottom:12px;
+}
+.logo h1{font-size:15px}
+.logo small{display:block;color:var(--dim);font-size:10px;font-weight:400}
+
+/* ============ MENU NAVIGASI ============ */
+.navitem{
+  display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;
+  cursor:pointer;color:var(--dim);margin-bottom:4px;font-size:14px;user-select:none;
+}
+.navitem:hover{background:var(--panel2);color:var(--txt)}
+.navitem.active{background:var(--acc);color:#fff}
+
+/* ============ AREA KONTEN UTAMA ============ */
+#main{margin-left:225px;flex:1;padding:20px 24px}
+
+/* ============ TOPBAR (STATISTIK) ============ */
+.topbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.stat{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:10px;padding:11px 16px;min-width:150px;flex:1;
+}
+.stat .label{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:1px}
+.stat .value{font-size:18px;font-weight:600;margin-top:3px}
+
+/* ============ GRID & KARTU ============ */
+.grid{display:grid;gap:13px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px}
