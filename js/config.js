@@ -1,8 +1,6 @@
 "use strict";
 /* ============ DATA STATIS GAME ============ */
 
-/* Model bus yang tersedia.
-   foto = nama file foto asli di folder assets/bus/ */
 const MODELS=[
  {id:'ekonomi',  nama:'Bus Ekonomi 2-2',     harga:250e6, kursi:52, kec:60, eff:3.4, wear:700,  deck:'std', foto:'ekonomi.jpg'},
  {id:'patas',    nama:'Bus Patas AC',        harga:480e6, kursi:44, kec:70, eff:3.2, wear:900,  deck:'std', foto:'patas.jpg'},
@@ -13,10 +11,8 @@ const MODELS=[
  {id:'dd',       nama:'Bus Double Decker',   harga:2900e6,kursi:64, kec:85, eff:2.3, wear:2500, deck:'dd',  foto:'dd.jpg'}
 ];
 
-/* Pilihan warna livery */
 const LIVERY=['#1f5fd0','#c92f2f','#17965a','#e08b1f','#7a34c9','#111a26','#d9dee6','#0e8f9e'];
 
-/* Daftar trayek antar kota */
 const TRAYEK=[
  {a:'Jakarta',   b:'Bandung',    dist:150, fare:75e3, demand:.92, izin:40e6},
  {a:'Jakarta',   b:'Semarang',   dist:450, fare:180e3,demand:.75, izin:90e6},
@@ -38,24 +34,22 @@ const TRAYEK=[
  {a:'Surabaya',  b:'Makassar',   dist:900, fare:420e3,demand:.45, izin:210e6}
 ];
 
-/* Bank nama untuk generator sopir */
 const NDEPAN=['Agus','Budi','Slamet','Joko','Wawan','Hendra','Yanto','Dedi','Rudi','Eko','Bagus','Firman','Tono','Iwan','Rian','Doni','Surya','Yusuf','Bambang','Arif','Heru','Galih','Nanang','Teguh','Wahyu'];
 const NBLK=['Santoso','Wijaya','Pratama','Hidayat','Saputra','Nugroho','Kurniawan','Setiawan','Purnomo','Handoko','Susilo','Pangestu','Utomo','Halim'];
 
-/* Label & ikon menu navigasi (SVG, tanpa emoji) */
+/* Ikon & label menu (6 tab) */
 const sv=(p,sz=18)=>`<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
 const ICONS={
  dash:sv('<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>'),
  armada:sv('<rect x="2" y="5" width="20" height="12" rx="2"/><path d="M5 17v2M19 17v2"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/><path d="M4 9h16"/>'),
  rute:sv('<circle cx="5" cy="19" r="2"/><circle cx="19" cy="5" r="2"/><path d="M7 19h6a4 4 0 0 0 4-4V7"/>'),
- peta:sv('<path d="M9 4l6 2 6-2v14l-6 2-6-2-6 2V6z"/><path d="M9 4v14M15 6v14"/>'),
  sopir:sv('<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/>'),
  bursa:sv('<path d="M3 4h2l2.5 11h11L21 7H6"/><circle cx="9" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/>'),
  keuangan:sv('<path d="M3 20h18"/><rect x="5" y="11" width="3.5" height="7"/><rect x="10.5" y="6" width="3.5" height="12"/><rect x="16" y="9" width="3.5" height="9"/>')
 };
-const LABELS={dash:'Dashboard',armada:'Armada Bus',rute:'Trayek / Rute',peta:'Peta Jaringan',sopir:'Sopir',bursa:'Bursa Bus',keuangan:'Keuangan'};
+const LABELS={dash:'Dashboard',armada:'Armada',rute:'Trayek',sopir:'Sopir',bursa:'Bursa Bus',keuangan:'Keuangan'};
 
-/* Koordinat kota untuk peta (viewBox 640x280) */
+/* Koordinat kota untuk peta dashboard (viewBox 640x280) */
 const KOTA={
  'Medan':{x:95,y:62},'Pekanbaru':{x:122,y:96},'Padang':{x:104,y:128},
  'Palembang':{x:152,y:152},'Jakarta':{x:186,y:192},'Bandung':{x:203,y:207},
@@ -64,7 +58,7 @@ const KOTA={
 };
 
 /* ============ KONSTANTA SIMULASI ============ */
-const BUNGA_PINJAMAN=0.025;      // per 30 hari
+const BUNGA_PINJAMAN=0.025;
 const LIMIT_PINJAMAN=200e6;
 const BIAYA_KANTOR_HARIAN=2e6;
 const AMBANG_BANGKRUT=-50e6;
