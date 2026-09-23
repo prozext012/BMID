@@ -1,35 +1,34 @@
-/* ============ SIDEBAR ============ */
+/* ============ SIDEBAR RAMPING ============ */
 #sidebar{
-  width:225px;background:var(--panel);border-right:1px solid var(--line);
-  padding:16px 12px;position:fixed;top:0;bottom:0;overflow-y:auto;z-index:40;
+  width:198px;background:var(--panel);border-right:1px solid var(--line);
+  padding:14px 10px;position:fixed;top:0;bottom:0;left:0;overflow-y:auto;z-index:40;
 }
-.logo{
-  display:flex;align-items:center;gap:10px;
-  padding:4px 8px 16px;border-bottom:1px solid var(--line);margin-bottom:12px;
-}
-.logo h1{font-size:15px}
+.logo{display:flex;gap:9px;align-items:center;padding:2px 6px 12px;margin-bottom:10px;border-bottom:1px solid var(--line)}
+.logo h1{font-size:13.5px;line-height:1.25}
 .logo small{display:block;color:var(--dim);font-size:10px;font-weight:400}
 
-/* ============ MENU NAVIGASI ============ */
 .navitem{
-  display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;
-  cursor:pointer;color:var(--dim);margin-bottom:4px;font-size:14px;user-select:none;
+  display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;
+  color:var(--dim);font-size:13px;cursor:pointer;margin-bottom:2px;user-select:none;
 }
+.navitem svg{width:17px;height:17px;flex:none}
 .navitem:hover{background:var(--panel2);color:var(--txt)}
-.navitem.active{background:var(--acc);color:#fff}
+.navitem.active{background:var(--accsoft);color:var(--acc);font-weight:600}
 
-/* ============ AREA KONTEN UTAMA ============ */
-#main{margin-left:225px;flex:1;padding:20px 24px}
+/* ============ KONTEN ============ */
+#main{margin-left:198px;flex:1;padding:14px 18px 30px;max-width:1240px}
 
-/* ============ TOPBAR (STATISTIK) ============ */
-.topbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-.stat{
-  background:var(--panel);border:1px solid var(--line);
-  border-radius:10px;padding:11px 16px;min-width:150px;flex:1;
+/* ============ TOPBAR KPI SATU BARIS ============ */
+#topbar{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:8px 14px;box-shadow:var(--sh);margin-bottom:14px;
 }
-.stat .label{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:1px}
-.stat .value{font-size:18px;font-weight:600;margin-top:3px}
-
-/* ============ GRID & KARTU ============ */
-.grid{display:grid;gap:13px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px}
+.kpis{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+.kpi{display:flex;flex-direction:column;gap:1px;min-width:66px}
+.k-l{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--dim)}
+.k-v{font-size:15px;font-weight:650}
+.k-v em{font-style:normal;font-size:10px;color:var(--dim);font-weight:500}
+.kbar{height:3px;background:var(--line);border-radius:2px;margin-top:3px;width:66px}
+.kbar i{display:block;height:100%;background:var(--acc);border-radius:2px}
+.tact{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
