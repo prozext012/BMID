@@ -47,6 +47,7 @@ function runDay(){
       bus.kondisi=Math.max(2,bus.kondisi-8);
       S.rep=Math.max(5,S.rep-2);
       logEv(`Bus ${bus.plat} MOGOK di trayek ${r.a}-${r.b}! Biaya darurat ${rpF(rugi)}.`,'bad');
+      S.autoPause=true;
       sop.lelah=Math.min(100,sop.lelah+20);
       continue;
     }
@@ -57,6 +58,7 @@ function runDay(){
       S.rep=Math.max(5,S.rep-4);
       sop.lelah=60;
       logEv(`Kecelakaan kecil: sopir ${sop.nama} kelelahan. Biaya ${rpF(rugi)}, reputasi turun.`,'bad');
+      S.autoPause=true;
       continue;
     }
 
@@ -144,6 +146,7 @@ function randomEvent(){
 
 /* ---------- Bangkrut ---------- */
 function bankrupt(){
+  if(S.auto)setAuto(false);
   showModal(
     '<h2 style="color:var(--bad)">BANGKRUT</h2>'
     +`<p style="margin:12px 0" class="dim">Kas menembus ${rpF(S.uang)}. `

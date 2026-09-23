@@ -14,9 +14,11 @@ function render(){
   else if(tab==='rute')c.innerHTML=viewRute();
   else if(tab==='sopir')c.innerHTML=viewSopir();
   else if(tab==='bursa')c.innerHTML=viewBursa();
+  else if(tab==='peta')c.innerHTML=viewPeta();
   else c.innerHTML=viewKeuangan();
 }
 
+/* ---------- Topbar + kontrol mode otomatis ---------- */
 function renderTop(){
   el('topbar').innerHTML=`
   <div class="stat"><div class="label">Kas</div>
@@ -25,9 +27,15 @@ function renderTop(){
   <div class="stat"><div class="label">Reputasi PO</div><div class="value">${Math.round(S.rep)} / 100</div>
     <div class="bar" style="width:100%;margin-top:5px"><div style="width:${S.rep}%;background:var(--acc)"></div></div></div>
   <div class="stat"><div class="label">BBM / liter</div><div class="value">${rpF(S.bbm)}</div></div>
-  <div class="stat" style="display:flex;align-items:center;gap:8px">
-    <button class="btn" onclick="runDay()">Jalankan 1 Hari</button>
-    <button class="btn gray" onclick="runDays(7)">Lewati 7 Hari</button>
+  <div class="stat" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+    <button class="btn" onclick="runDay()">+1 Hari</button>
+    <button class="btn gray" onclick="runDays(7)">+7 Hari</button>
+    <button class="btn ${S.auto?'red':'green'}" onclick="setAuto(!S.auto)">${S.auto?'Jeda Auto':'Auto Jalan'}</button>
+    <select style="width:64px" onchange="setSpeed(this.value)" title="Kecepatan mode auto">
+      <option value="1"${S.speed===1?' selected':''}>1x</option>
+      <option value="2"${S.speed===2?' selected':''}>2x</option>
+      <option value="4"${S.speed===4?' selected':''}>4x</option>
+    </select>
   </div>`;
 }
 
@@ -177,6 +185,59 @@ function viewBursa(){
     </div>`).join('')}
   ${S.pasar.bus.length===0?'<div class="card dim">Stok bus bekas habis, kembali beberapa hari lagi.</div>':''}
   </div>`;
+}
+
+/* ---------- Peta Jaringan ---------- */
+function viewPeta(){
+  const pulau=`
+   <path d="M70 40 L110 55 L150 110 L175 165 L160 175 L120 140 L85 90 Z" fill="#182338"/>
+   <path d="M175 185 L310 200 L315 215 L240 232 L180 205 Z" fill="#182338"/>
+   <path d="M295 240 L320 238 L325 246 L300 248 Z" fill="#182338"/>
+   <path d="M300 60 L380 70 L400 130 L360 165 L310 140 Z" fill="#182338"/>
+   <path d="M420 150 L450 140 L470 170 L460 210 L480 250 L460 262 L440 220 L430 250 L415 245 L425 190 Z" fill="#182338"/>
+   <path d="M560 170 L625 180 L625 260 L575 250 L560 210 Z" fill="#182338"/>`;
+  const lines=S.rute.map(r=>{
+    const a=KOTA[r.a],b=KOTA[r.b];
+    if(!a||!b)return '';
+    const siap=r.busId&&r.sopirId;
+    const col=!r.aktif?'#39465f':(siap?'#33c27f':'#e05555');
+    const dash=!r.aktif?'stroke-dasharray="5 5"':'';
+    let bus='';
+    if(r.aktif&&siap){
+      const dur=Math.max(2.5,r.dist/140);
+      bus=`<circle r="3.5" fill="#ffd76a"><animateMotion dur="${dur}s" repeatCount="indefinite" path="M${a.x} ${a.y} L${b.x} ${b.y}"/></circle>
+           <circle r="3.5" fill="#ffd76a"><animateMotion dur="${dur}s" repeatCount="indefinite" path="M${b.x} ${b.y} L${a.x} ${a.y}"/></circle>`;
+    }
+    return `<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${col}" stroke-width="2" ${dash} opacity=".9"/>`+bus;
+  }).join('');
+  const nodes=Object.keys(KOTA).map(n=>{
+    const p=KOTA[n];
+    const own=S.rute.some(r=>r.a===n||r.b===n);
+    const act=S.rute.some(r=>(r.a===n||r.b===n)&&r.aktif&&r.busId&&r.sopirId);
+    return `<circle cx="${p.x}" cy="${p.y}" r="${own?6:3.5}" fill="${act?'#33c27f':own?'#3d7dfd':'#54627e'}" stroke="#0b1322" stroke-width="2"/>
+    <text x="${p.x}" y="${p.y-10}" text-anchor="middle" font-size="11" font-weight="${own?700:400}" fill="${own?'#e8edf5':'#76849c'}">${n}</text>`;
+  }).join('');
+  const kotaOwn=new Set();S.rute.forEach(r=>{kotaOwn.add(r.a);kotaOwn.add(r.b);});
+  const kmTot=S.rute.reduce((a,r)=>a+r.dist,0);
+  const nAktif=S.rute.filter(r=>r.aktif&&r.busId&&r.sopirId).length;
+  return `<h2 class="sec">Peta Jaringan Trayek</h2>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin-bottom:14px">
+    <div class="card"><div class="dim">Kota Terlayani</div><div style="font-size:22px;font-weight:700">${kotaOwn.size} / ${Object.keys(KOTA).length}</div></div>
+    <div class="card"><div class="dim">Trayek Dimiliki</div><div style="font-size:22px;font-weight:700">${S.rute.length}</div></div>
+    <div class="card"><div class="dim">Trayek Aktif</div><div style="font-size:22px;font-weight:700;color:var(--ok)">${nAktif}</div></div>
+    <div class="card"><div class="dim">Panjang Jaringan</div><div style="font-size:22px;font-weight:700">${kmTot.toLocaleString('id')} km</div></div>
+  </div>
+  <div class="mapwrap">
+    <svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg">
+      ${pulau}${lines}${nodes}
+    </svg>
+    <div class="maplegend">
+      <span><i style="background:#33c27f"></i>Trayek aktif (titik kuning = bus sedang berjalan)</span>
+      <span><i style="background:#e05555"></i>Aktif tapi bus/sopir belum lengkap</span>
+      <span><i style="background:#39465f"></i>Trayek tidak aktif</span>
+    </div>
+  </div>
+  <p class="dim" style="margin-top:10px">Titik biru/hijau = kota yang sudah punya trayek kamu. Buka trayek baru di halaman <b style="color:var(--txt)">Trayek / Rute</b> untuk memperluas jaringan.</p>`;
 }
 
 /* ---------- Keuangan ---------- */

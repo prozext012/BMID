@@ -48,11 +48,20 @@ const ICONS={
  dash:sv('<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>'),
  armada:sv('<rect x="2" y="5" width="20" height="12" rx="2"/><path d="M5 17v2M19 17v2"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/><path d="M4 9h16"/>'),
  rute:sv('<circle cx="5" cy="19" r="2"/><circle cx="19" cy="5" r="2"/><path d="M7 19h6a4 4 0 0 0 4-4V7"/>'),
+ peta:sv('<path d="M9 4l6 2 6-2v14l-6 2-6-2-6 2V6z"/><path d="M9 4v14M15 6v14"/>'),
  sopir:sv('<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/>'),
  bursa:sv('<path d="M3 4h2l2.5 11h11L21 7H6"/><circle cx="9" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/>'),
  keuangan:sv('<path d="M3 20h18"/><rect x="5" y="11" width="3.5" height="7"/><rect x="10.5" y="6" width="3.5" height="12"/><rect x="16" y="9" width="3.5" height="9"/>')
 };
-const LABELS={dash:'Dashboard',armada:'Armada Bus',rute:'Trayek / Rute',sopir:'Sopir',bursa:'Bursa Bus',keuangan:'Keuangan'};
+const LABELS={dash:'Dashboard',armada:'Armada Bus',rute:'Trayek / Rute',peta:'Peta Jaringan',sopir:'Sopir',bursa:'Bursa Bus',keuangan:'Keuangan'};
+
+/* Koordinat kota untuk peta (viewBox 640x280) */
+const KOTA={
+ 'Medan':{x:95,y:62},'Pekanbaru':{x:122,y:96},'Padang':{x:104,y:128},
+ 'Palembang':{x:152,y:152},'Jakarta':{x:186,y:192},'Bandung':{x:203,y:207},
+ 'Semarang':{x:238,y:199},'Yogyakarta':{x:236,y:221},'Surabaya':{x:278,y:209},
+ 'Denpasar':{x:305,y:236},'Makassar':{x:438,y:252},'Palu':{x:452,y:192}
+};
 
 /* ============ KONSTANTA SIMULASI ============ */
 const BUNGA_PINJAMAN=0.025;      // per 30 hari
