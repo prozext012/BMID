@@ -11,7 +11,7 @@
   .logo{display:none}
   .navitem{
     flex-direction:column;gap:3px;font-size:9.5px;padding:7px 6px;
-    min-width:62px;justify-content:center;text-align:center;
+    min-width:52px;justify-content:center;text-align:center;
     margin-bottom:0;border-radius:8px;
   }
   .navitem svg{width:20px;height:20px}
