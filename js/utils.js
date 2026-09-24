@@ -31,11 +31,10 @@ function shade(hex,p){
 
 /* Bintang kualitas (1-5) */
 const stars=q=>'<span style="color:var(--warn);letter-spacing:2px">'
-  +'&#9733;'.repeat(q)+'<span style="color:#33405c">'+'&#9733;'.repeat(5-q)+'</span></span>';
+  +'&#9733;'.repeat(q)+'<span style="color:#d4dbe6">'+'&#9733;'.repeat(5-q)+'</span></span>';
 
 /* Bar kondisi berwarna */
 function condBar(v){
   const col=v>60?'var(--ok)':v>30?'var(--warn)':'var(--bad)';
-  return `<div class="flex"><div class="bar"><div style="width:${v}%;background:${col}"></div></div>`
-    +`<span style="font-size:12px">${Math.round(v)}%</span></div>`;
+  return `<div class="bar"><div style="width:${v}%;background:${col}"></div></div>`;
 }
